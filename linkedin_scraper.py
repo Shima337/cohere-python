@@ -1,17 +1,15 @@
 import json
 from urllib.parse import urlparse
-import os
-
 
 from linkedin_api import Linkedin  # https://github.com/tomquirk/linkedin-api.git
+import os 
 
 
-email = os.getenv("LINKEDIN_EMAIL")
-password = os.getenv("LINKEDIN_PASSWORD")
+#email = os.getenv("LINKEDIN_EMAIL")
+#password = os.getenv("LINKEDIN_PASSWORD")
 
-email = "growgreenby@gmail.com"
-password = "givemeamillion"
-
+email = "zlovredny@gmail.com"
+password = "Vv335292168071"
 
 def get_username_from_link(link):
     parse = urlparse(link)
@@ -21,6 +19,7 @@ def get_username_from_link(link):
 
 
 def scrap_profile(profile_link):
+    print(email,  password)
     profile_name = get_username_from_link(profile_link)
     api = Linkedin(email, password)
     # GET a profile
