@@ -7,7 +7,7 @@ from linkedin_scraper import scrap_profile
 
 
 app = Flask(__name__)
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key ="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"
 
 @app.route('/dev/parse', methods=["POST"])
 def parse_linkedin():
@@ -52,3 +52,5 @@ def trenings_prompt(data):
 @app.route('/dev/test')
 def hello_world():
     return  'hello world'
+
+

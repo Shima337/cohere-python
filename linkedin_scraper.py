@@ -8,7 +8,7 @@ import os
 #email = os.getenv("LINKEDIN_EMAIL")
 #password = os.getenv("LINKEDIN_PASSWORD")
 
-email = "zlovredny@gmail.com"
+email = "ashsimansk2@gmail.com"
 password = "Vv335292168071"
 
 def get_username_from_link(link):
