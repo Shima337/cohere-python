@@ -1,13 +1,11 @@
-import os
-
-import openai
 from flask import Flask, redirect, render_template, request, url_for
+from flask_cors import CORS
+from cohere_api import cohere_generate
+from gpt_api import gpt_generate
 from linkedin_scraper import scrap_profile
 
-
-
 app = Flask(__name__)
-openai.api_key ="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"
+CORS(app, resources=r'/dev/*')
 
 @app.route('/dev/parse', methods=["POST"])
 def parse_linkedin():
@@ -19,26 +17,17 @@ def parse_linkedin():
     print( profile)
     return profile
 
-
 @app.route('/dev/gpt', methods=["POST"])
 def send_gpt():
-    body =  request.json['person_info']
-    response= request_gpt(body)
-    print(response)
-    return {'response': response}
+    body = request.json['person_info']
+    data = trenings_prompt(body)
+    return {'response': gpt_generate(data)}
 
-
-def request_gpt(data):
-    response = openai.Completion.create(
-           model="text-davinci-002",
-            max_tokens = 250,
-            top_p = 1.00,
-            frequency_penalty = 0,
-            presence_penalty = 0,
-            prompt=trenings_prompt(data),
-            temperature=0.7,
-        )
-    return response.choices[0].text
+@app.route('/dev/cohere', methods=["POST"])
+def send_cohere():
+    body = request.json['person_info']
+    data = trenings_prompt(body)
+    return {'response': cohere_generate(data)}
 
 
 def trenings_prompt(data):
